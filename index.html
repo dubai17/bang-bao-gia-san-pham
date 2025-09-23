@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo Giá Khách Hàng</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            padding: 2rem;
+        }
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 8.5in;
+            margin: auto;
+            border: 1px solid #e2e8f0;
+        }
+        .editable {
+            border: 1px solid transparent;
+            padding: 0.25rem;
+            border-radius: 0.25rem;
+        }
+        .editable:hover {
+            border-color: #cbd5e0;
+        }
+        .editable:focus {
+            border-color: #4c51bf;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="text-center mb-8">
+            <h1 class="text-2xl font-bold uppercase mb-1">PHIẾU XUẤT KHO BÁN HÀNG</h1>
+            <p class="text-sm">Ngày <span id="date"></span></p>
+        </header>
+
+        <section class="mb-6 text-sm">
+            <div class="flex justify-between items-center mb-2">
+                <div>
+                    <div class="flex items-center mb-1">
+                        <span class="w-24 font-semibold">Người mua:</span>
+                        <span id="customer-name" class="editable text-gray-700 font-bold" contenteditable="false">Em Minh</span>
+                    </div>
+                    <div class="flex items-center mb-1">
+                        <span class="w-24 font-semibold">Tên khách hàng:</span>
+                        <span class="editable text-gray-700" contenteditable="false">Em Minh - chuyên chiếu sáng</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-24 font-semibold">Địa chỉ:</span>
+                        <span class="editable text-gray-700" contenteditable="false">Minh Khai, Hà Nội 0868.605.293</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center mb-1">
+                        <span class="w-12 font-semibold">Số:</span>
+                        <span class="editable text-gray-700" contenteditable="false">PXK21020</span>
+                    </div>
+                    <div class="flex items-center mb-1">
+                        <span class="w-12 font-semibold">Nợ:</span>
+                        <span class="editable text-gray-700" contenteditable="false">131</span>
+                    </div>
+                    <div class="flex items-center mb-1">
+                        <span class="w-12 font-semibold">Có:</span>
+                        <span class="editable text-gray-700" contenteditable="false">5111</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-12 font-semibold">Loại tiền:</span>
+                        <span class="text-gray-700">VND</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center mt-2">
+                <span class="w-24 font-semibold">Diễn giải:</span>
+                <span class="editable text-gray-700" contenteditable="false">Bán hàng Em Minh- chuyên chiếu sáng</span>
+            </div>
+        </section>
+
+        <table class="w-full text-sm border-collapse mb-6">
+            <thead>
+                <tr class="bg-gray-100 text-left font-semibold">
+                    <th class="border border-gray-400 p-2 text-center w-12">STT</th>
+                    <th class="border border-gray-400 p-2">Mã hàng</th>
+                    <th class="border border-gray-400 p-2">Tên hàng</th>
+                    <th class="border border-gray-400 p-2 text-center w-20">Đơn vị</th>
+                    <th class="border border-gray-400 p-2 text-center w-20">Số lượng</th>
+                    <th class="border border-gray-400 p-2 text-right">Đơn giá</th>
+                    <th class="border border-gray-400 p-2 text-right">Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="border border-gray-400 p-2 text-center">1</td>
+                    <td class="border border-gray-400 p-2 editable" contenteditable="false">PHACOCNYV500</td>
+                    <td class="border border-gray-400 p-2 editable" contenteditable="false">Pha cốc ánh sáng vàng 500w</td>
+                    <td class="border border-gray-400 p-2 text-center editable" contenteditable="false">Cái</td>
+                    <td class="border border-gray-400 p-2 text-center editable quantity" contenteditable="false">2,00</td>
+                    <td class="border border-gray-400 p-2 text-right editable unit-price" contenteditable="false">950.000,00</td>
+                    <td class="border border-gray-400 p-2 text-right subtotal">1.900.000</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-400 p-2 font-semibold" colspan="2">Cộng</td>
+                    <td class="border border-gray-400 p-2" colspan="5"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="flex justify-end text-sm mb-4">
+            <div class="w-full max-w-sm">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-semibold">Cộng tiền hàng:</span>
+                    <span id="subtotal-display" class="font-bold text-lg">1.900.000</span>
+                </div>
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-semibold">Tiền thuế GTGT:</span>
+                    <span class="text-gray-700">0</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="font-semibold">Tổng tiền thanh toán:</span>
+                    <span id="total-display" class="font-bold text-lg">1.900.000</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-sm mb-8">
+            <p class="font-semibold mb-2">Số tiền viết bằng chữ: <span id="amount-in-words" class="italic font-normal">Một triệu chín trăm nghìn đồng chẵn.</span></p>
+            <p class="font-semibold">Số chứng từ gốc kèm theo: ............................................................................</p>
+        </div>
+
+        <footer class="flex justify-between text-center text-sm italic">
+            <div class="w-1/3">
+                <p>Người mua hàng</p>
+                <p class="mt-12">(Ký, họ tên)</p>
+            </div>
+            <div class="w-1/3">
+                <p>Kế toán trưởng</p>
+                <p class="mt-12">(Ký, họ tên)</p>
+            </div>
+            <div class="w-1/3">
+                <p>Giám đốc</p>
+                <p class="mt-12">(Ký, họ tên, đóng dấu)</p>
+            </div>
+        </footer>
+    </div>
+    
+    <div class="no-print mt-8 text-center">
+        <button id="edit-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+            Sửa Nội Dung
+        </button>
+        <button id="print-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 transform hover:scale-105 ml-4">
+            In Phiếu
+        </button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dateSpan = document.getElementById('date');
+            const today = new Date();
+            const day = today.getDate();
+            const month = today.getMonth() + 1;
+            const year = today.getFullYear();
+            dateSpan.textContent = ` ${day} tháng ${month} năm ${year}`;
+
+            const editBtn = document.getElementById('edit-btn');
+            const printBtn = document.getElementById('print-btn');
+            let isEditing = false;
+
+            const editableElements = document.querySelectorAll('.editable');
+            const quantityInputs = document.querySelectorAll('.quantity');
+            const priceInputs = document.querySelectorAll('.unit-price');
+
+            const formatter = new Intl.NumberFormat('vi-VN');
+
+            const toVietnameseWords = (number) => {
+                const units = ['', 'nghìn', 'triệu', 'tỷ', 'nghìn tỷ', 'triệu tỷ'];
+                const a = ['', 'một', 'hai', 'ba', 'bốn', 'năm', 'sáu', 'bảy', 'tám', 'chín'];
+                const b = ['', 'mười', 'hai mươi', 'ba mươi', 'bốn mươi', 'năm mươi', 'sáu mươi', 'bảy mươi', 'tám mươi', 'chín mươi'];
+                const c = ['', 'linh', 'lẻ'];
+
+                const readThreeDigits = (num) => {
+                    let str = '';
+                    const h = Math.floor(num / 100);
+                    const t = Math.floor((num % 100) / 10);
+                    const d = num % 10;
+                    if (h !== 0) str += a[h] + ' trăm ';
+                    if (t !== 0) {
+                        if (t === 1) {
+                            if (d === 0) str += b[t];
+                            else str += b[t] + ' ' + a[d];
+                        } else {
+                            if (t === 0 && d !== 0) str += c[1] + ' ' + a[d];
+                            else if (t === 1 && d !== 0) str += a[1] + ' ' + a[d];
+                            else if (d === 5 && t > 0) str += a[t] + ' mươi lăm';
+                            else if (d === 0) str += b[t];
+                            else if (d === 1 && t !== 1 && t !== 0) str += b[t] + ' mươi mốt';
+                            else str += b[t] + ' mươi ' + a[d];
+                        }
+                    } else if (h !== 0 && d !== 0) {
+                        str += c[0] + ' ' + a[d];
+                    }
+                    if (t === 0 && d !== 0 && h !== 0) {
+                        str += 'lẻ ' + a[d];
+                    }
+                    return str.trim();
+                };
+
+                if (number === 0) return 'Không đồng';
+                
+                let str = '';
+                let i = 0;
+                while (number > 0) {
+                    const threeDigits = number % 1000;
+                    if (threeDigits > 0) {
+                        let chunk = readThreeDigits(threeDigits);
+                        if (i > 0) {
+                            chunk += ' ' + units[i];
+                        }
+                        str = chunk + ' ' + str;
+                    }
+                    number = Math.floor(number / 1000);
+                    i++;
+                }
+
+                return str.trim() + ' đồng chẵn.';
+            };
+
+            const calculateTotals = () => {
+                let subtotal = 0;
+                for (let i = 0; i < quantityInputs.length; i++) {
+                    const quantity = parseFloat(quantityInputs[i].innerText.replace(',', '.'));
+                    const price = parseFloat(priceInputs[i].innerText.replace(/\./g, ''));
+                    const rowSubtotal = quantity * price;
+                    const rowSubtotalElement = quantityInputs[i].closest('tr').querySelector('.subtotal');
+                    rowSubtotalElement.innerText = formatter.format(rowSubtotal);
+                    subtotal += rowSubtotal;
+                }
+
+                document.getElementById('subtotal-display').innerText = formatter.format(subtotal);
+                document.getElementById('total-display').innerText = formatter.format(subtotal);
+                document.getElementById('amount-in-words').innerText = toVietnameseWords(subtotal);
+            };
+
+            editBtn.addEventListener('click', () => {
+                isEditing = !isEditing;
+                editableElements.forEach(el => {
+                    el.contentEditable = isEditing;
+                    if (isEditing) {
+                        el.style.border = '1px solid #cbd5e0';
+                        el.focus();
+                    } else {
+                        el.style.border = '1px solid transparent';
+                    }
+                });
+                editBtn.textContent = isEditing ? 'Xong' : 'Sửa Nội Dung';
+                editBtn.classList.toggle('bg-blue-600', !isEditing);
+                editBtn.classList.toggle('hover:bg-blue-700', !isEditing);
+                editBtn.classList.toggle('bg-gray-500', isEditing);
+                editBtn.classList.toggle('hover:bg-gray-600', isEditing);
+            });
+
+            editableElements.forEach(el => {
+                el.addEventListener('blur', () => {
+                    if (el.classList.contains('quantity') || el.classList.contains('unit-price')) {
+                        calculateTotals();
+                    }
+                });
+                el.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        el.blur();
+                    }
+                });
+            });
+
+            printBtn.addEventListener('click', () => {
+                window.print();
+            });
+
+            calculateTotals();
+        });
+    </script>
+</body>
+</html>
